@@ -18,7 +18,7 @@ public class Driver {
     public void setAvailable(boolean available) { this.available = available; }
 
     // Driver Functions
-    public void updateAvailability(boolean available) {
+    public void updateStatus(boolean available) {
         this.available = available;
     }
 
