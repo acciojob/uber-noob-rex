@@ -1,37 +1,36 @@
 package com.driver.model;
 
+import com.driver.model.Customer;
+import com.driver.model.TripStatus;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "TripBooking")
-public class TripBooking{
+@Table(name = "tripBooking")
+public class TripBooking {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int tripBookingId;
+    private int tripBookingId;
 
-    String fromLocation;
+    private String fromLocation;
+    private String toLocation;
+    private int distanceInKm;
 
-    String toLocation;
+    @Enumerated(EnumType.STRING)
+    private TripStatus status;
 
-    int distanceInKm;
+    private int bill;
 
-    TripStatus status;
+   @ManyToOne
+   @JoinColumn
+   Customer customer;
 
-    int bill;
-
-
-    //For mapping to customer(parent)
-    @ManyToOne
-    @JoinColumn
-    Customer customer;
-
-    //For mapping to driver(parent)
-    @ManyToOne
+   @ManyToOne
     @JoinColumn
     Driver driver;
 
     public TripBooking() {
-
     }
 
     public TripBooking(int tripBookingId, String fromLocation, String toLocation, int distanceInKm, TripStatus status, int bill, Customer customer, Driver driver) {
