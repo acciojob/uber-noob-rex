@@ -14,7 +14,7 @@ public class Admin {
     public void setPassword(String password) { this.password = password; }
 
     // Admin Functions
-    public void updatePassword(String newPassword) {
+    public void updateAdminPassword(String newPassword) {
         this.password = newPassword;
     }
 
