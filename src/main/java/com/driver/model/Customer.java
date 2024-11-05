@@ -10,7 +10,6 @@ public class Customer{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int customerId;
-
     String mobile;
 
     String password;
