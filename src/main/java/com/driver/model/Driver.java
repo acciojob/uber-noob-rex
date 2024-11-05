@@ -1,28 +1,79 @@
-public class Driver {
-    private String name;
-    private String licenseNumber;
-    private boolean available;
+package com.driver.model;
 
-    public Driver(String name, String licenseNumber) {
-        this.name = name;
-        this.licenseNumber = licenseNumber;
-        this.available = true;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "Driver")
+public class Driver{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int driverId;
+
+    String mobile;
+
+    String password;
+
+    //For mapping to tripBooking(Child)
+    @OneToMany(mappedBy = "driver", cascade = CascadeType.ALL)
+    List<TripBooking> tripBookingList = new ArrayList<>();
+
+    //For mapping to Cab(Parent)
+    @OneToOne(mappedBy = "driver", cascade = CascadeType.ALL)
+    Cab cab;
+
+    public Driver() {
+
     }
 
-    // Getters and Setters
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    public String getLicenseNumber() { return licenseNumber; }
-    public void setLicenseNumber(String licenseNumber) { this.licenseNumber = licenseNumber; }
-    public boolean isAvailable() { return available; }
-    public void setAvailable(boolean available) { this.available = available; }
 
-    // Driver Functions
-    public void updateStatus(boolean available) {
-        this.available = available;
+
+    public Driver(int driverId, String mobile, String password, List<TripBooking> tripBookingList, Cab cab) {
+        this.driverId = driverId;
+        this.mobile = mobile;
+        this.password = password;
+        this.tripBookingList = tripBookingList;
+        this.cab = cab;
     }
 
-    public void deleteDriver() {
-        // Logic to delete driver, e.g., remove from database
+    public int getDriverId() {
+        return driverId;
+    }
+
+    public void setDriverId(int driverId) {
+        this.driverId = driverId;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<TripBooking> getTripBookingList() {
+        return tripBookingList;
+    }
+
+    public void setTripBookingList(List<TripBooking> tripBookingList) {
+        this.tripBookingList = tripBookingList;
+    }
+
+    public Cab getCab() {
+        return cab;
+    }
+
+    public void setCab(Cab cab) {
+        this.cab = cab;
     }
 }
